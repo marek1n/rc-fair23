@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <link rel="stylesheet" href="static/css/pico.min.css">
+    <style>
+        /* .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        } */
+        
+        .image-box {
+            margin: 10px;
+            text-align: center;
+            flex: 1 1 calc(33.33% - 40px);
+        }
+
+        .image-box img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .image-description {
+            margin-top: 10px;
+        }
+
+        .header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 30px;
+        }
+
+        .logo {
+            max-width: 300px;
+        }
+
+        .next-button {
+            width: 50%;
+            text-align: center;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .image-box img {
+            max-width: 50%;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- <section>
+    <div class="header">
+        <img class="logo" src="static/assets/scioi_logo.jpeg" alt="Logo">
+    </div>
+    </section> -->
+
+    <main class="container">
+        <article>
+        <div class="grid">
+            <div class="image-box">
+                <p class="image-description">Your Ben</p>
+                <img src="{{ url_for('static', filename=subjectCI_0) }}" alt="Classification Image 1">
+            </div>
+            <div class="image-box">
+                <p class="image-description">Average Ben</p>
+                <img src="{{ url_for('static', filename='cis/average/avg_0.png') }}" alt="Average Image 1">
+            </div>
+            <div class="image-box">
+                <p class="image-description">AI Ben</p>
+                <img src="{{ url_for('static', filename='cis/average/sys_0.png') }}" alt="System Image 1">
+            </div>
+        </div>
+        <div class="grid">
+            <div class="image-box">
+                <p class="image-description">Your Tom</p>
+                <img src="{{ url_for('static', filename=subjectCI_1) }}" alt="Classification Image 2">
+            </div>
+            <div class="image-box">
+                <p class="image-description">Average Tom</p>
+                <img src="{{ url_for('static', filename='cis/average/avg_1.png') }}" alt="Average Image 2">
+            </div>
+            <div class="image-box">
+                <p class="image-description">AI Tom</p>
+                <img src="{{ url_for('static', filename='cis/average/sys_1.png') }}" alt="System Image 2">
+            </div>
+        </div>
+    </article>
+
+        <div class="center">
+            <button class="next-button" onclick="window.location.href='/'">Start Over</button>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+blinker
+click
+Flask
+Flask-Cors==4.0.0
+importlib-metadata
+itsdangerous
+Jinja2
+MarkupSafe
+numpy
+pandas
+python-dateutil==2.8.2
+python-dotenv==1.0.0
+pytz==2023.3
+six==1.16.0
+tzdata==2023.3
+Werkzeug
+zipp

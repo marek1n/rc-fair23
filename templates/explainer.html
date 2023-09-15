@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC demo</title>
+    <link rel="stylesheet" href="static/css/pico.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 30px;
+        }
+
+        .logo {
+            max-width: 300px;
+        }
+
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #next-button {
+            width: 50%;
+            text-align: center;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="header">
+            <img class="logo" src="static/assets/scioi_logo.jpeg" alt="Logo">
+        </div>
+    </section>
+
+    <main class="container">
+
+        <h1>Social Intelligence - Seeing faces in context</h1>
+        
+        <progress id="p-bar"></progress>
+
+        <p>The <b>reverse correlation</b> method is a data-driven method increasingly used in social psychology 
+            to study how people perceive faces. Click on questions below to learn more.</p>
+        </p>
+
+        <details>
+            <summary>What influences human face perception?</summary>
+            <p>Our perception is always affected by our expectations. When perceiving faces we take into account
+                 what we know about the person as well as numerous context clues.
+            </p>
+        </details>
+        <details>
+            <summary>What is the method?</summary>
+            <p>A grayscale base image is overlayed with specific random noise filters, yielding a stimulus image and its exact inverse at each trial.
+            In effect, a large feature space is sampled by this method without the need for a priori hypotheses.
+            At the end of the experiment, the average of all selected images is computed (click on the button below to see your results).
+            </p>
+        </details>
+        <details>
+            <summary>How is it used?</summary>
+            <p>We are trying to visualize the influence of semantic context on the perception of facial expressions. 
+                This idea is called <b>knowledge-augemented face processing</b></p>
+        </details>
+
+        <div class="center">
+            <button id="next-button" onclick="window.location.href='/results'", disabled="disabled">loading ....</button>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout( () => {
+                document.getElementById("next-button").innerHTML = "Show results";
+                document.getElementById("next-button").disabled = false;
+                // document.getElementById("next-button").ariaBusy = false;
+                document.getElementById("p-bar").value = "100";
+            }, 15000);
+        });
+    </script>
+</body>
+</html>

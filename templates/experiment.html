@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="{{ url_for('static', filename='jspsych/jspsych.js') }}"></script>
+    <script src="{{ url_for('static', filename='jspsych/plugin-html-keyboard-response.js') }}"></script>
+    <script src="{{ url_for('static', filename='jspsych/plugin-image-button-response.js') }}"></script>
+    <script src="{{ url_for('static', filename='jspsych/plugin-instructions.js') }}"></script>
+    <script src="{{ url_for('static', filename='jspsych/plugin-preload.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='jspsych/jspsych.css') }}"/>
+  </head>
+
+  <body>
+  <script>
+
+    const jsPsych = initJsPsych({
+      on_finish: (data) => {
+        // jsPsych.data.displayData();
+        // send to server
+        fetch('/results', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({...data, final: true})
+        })
+        .then(response => {
+          console.log('Data sent successfully');
+          // redirect to results screen
+          window.location.href = '/explainer';
+        })
+        .catch(error => {
+          console.error('Error sending data:', error);
+        });
+      }
+    });
+
+
+    // Welcome screen
+    const welcome = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `<p>Im folgenden Abschnitt werden Ihnen immer wieder Gesichterpaare gezeigt.</p>
+                  <p>Wählen Sie jeweils das Gesicht aus, welches ihrer Meinung nach eher Freude
+                  ausdrückt.</p>
+                  <p>Um ein Gesicht auszuwählen klicken Sie bitte mit ihrem Cursor auf das
+                  jeweilige Bild.<p/>`,
+        trial_duration: 3000
+      };
+
+    const instruction = {
+      type: jsPsychInstructions,
+      pages: [
+        // pages 1
+        `<p>Let me tell you about <b>Ben</b>.</p>`,
+        // page 2
+        `<div>
+          <p><b>Ben</b> likes to surprise his colleagues with coffee and donuts.</p> 
+          <p>Recently, he has organized a festival to fundraise money for refugees.</p> 
+          <p>It was a huge success.</p>
+        </div>` + `<img src="static/assets/noimg.jpeg" width="200" style="float: bottom; margin-right: 10px;">`
+      ],
+      show_clickable_nav: true,
+      allow_keys: false,
+      button_label_previous: 'Previous',
+      button_label_next: 'Next',
+      button_label_finish: 'Begin',
+    };
+
+    // fixation cross
+    const fixation = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: '<div style="font-size:60px;color:black">+</div>',
+      choices: "NO_KEYS",
+      trial_duration: 1000,
+      // data: { screen: "fixation" }
+    };
+
+    const trial = {
+      type: jsPsychImageButtonResponse,
+      // choices: ['<img src="static/assets/imgs/pic1.png" />', '<img src="static/assets/imgs/pic2.png" />'],
+      prompt: "<p>Which face better matches <b>Ben</b>?</p>",
+      timeline: [
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00001_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00001_ori.png" />']},
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00002_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00002_ori.png" />']},
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00003_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00003_ori.png" />']},
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00004_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00004_ori.png" />']},
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00005_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00005_ori.png" />']},
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00006_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00006_ori.png" />']},
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00007_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00007_ori.png" />']},
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00008_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00008_ori.png" />']},
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00009_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00009_ori.png" />']},
+        {choices: ['<img src="static/assets/imgs/rcic_base_1_00010_inv.png" />', '<img src="static/assets/imgs/rcic_base_1_00010_ori.png" />']},
+
+      ],
+      data: { 'condition': 0 },
+      // on_finish: () => {
+      //   console.log(trial);
+      // }
+    };
+
+    const instruction2 = {...instruction, pages: [
+      // pages 1
+      `<p>Now let me tell you about <b>Tom</b>.</p>`,
+      // page 2
+      `<div>
+        <p><b>Tom</b> has been bullying one of his colleagues.</p> 
+        <p>Recently, he was heard shouting abuse at football players in the stadium.</p>
+        </div>` + `<img src="static/assets/noimg.jpeg" width="200" style="float: bottom; margin-right: 10px;">`
+      ]
+    }
+
+    const trial2 = {
+      ...trial, 
+      prompt: "<p>Which face better matches <b>Tom</b>?</p>", 
+      data: { 'condition': 1 }
+    }
+
+    // data for part1 sent to compute CI
+    const part1 = {
+      timeline: [instruction, trial],
+      randomize_order: false,
+      on_timeline_finish: () => {
+        let send = (data) => {
+          // send to server
+          fetch('/results', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({...data, final: false})
+          })
+          .then(response => {
+            console.log('Data sent successfully');
+          })
+          .catch(error => {
+            console.error('Error sending data:', error);
+          });
+        }
+
+        send(jsPsych.data.get());
+        console.log(JSON.stringify(jsPsych.data.get()));
+      }
+    };
+
+    const part2 = {
+      timeline: [instruction2, trial2],
+      randomize_order: false
+    };
+
+    // const procedure = {
+    //   timeline: [instruction, trial, instruction2, trial2],
+    //   // timeline_variables: null, 
+    //   randomize_order: false
+    // };
+
+    // preload images
+    const preloadPart1 = {
+        type: jsPsychPreload,
+        // TODO preload by map from trial.timeline
+        images: ["static/assets/noimg.jpeg", "static/assets/imgs/rcic_base_1_00001_inv.png", "static/assets/imgs/rcic_base_1_00001_ori.png",
+        "static/assets/imgs/rcic_base_1_00002_inv.png", "static/assets/imgs/rcic_base_1_00002_ori.png",
+        "static/assets/imgs/rcic_base_1_00003_inv.png", "static/assets/imgs/rcic_base_1_00003_ori.png",
+        "static/assets/imgs/rcic_base_1_00004_inv.png", "static/assets/imgs/rcic_base_1_00004_ori.png",
+        "static/assets/imgs/rcic_base_1_00005_inv.png", "static/assets/imgs/rcic_base_1_00005_ori.png",
+        "static/assets/imgs/rcic_base_1_00006_inv.png", "static/assets/imgs/rcic_base_1_00006_ori.png",
+        "static/assets/imgs/rcic_base_1_00007_inv.png", "static/assets/imgs/rcic_base_1_00007_ori.png",
+        "static/assets/imgs/rcic_base_1_00008_inv.png", "static/assets/imgs/rcic_base_1_00008_ori.png",
+        "static/assets/imgs/rcic_base_1_00009_inv.png", "static/assets/imgs/rcic_base_1_00009_ori.png",
+        "static/assets/imgs/rcic_base_1_00010_inv.png", "static/assets/imgs/rcic_base_1_00010_ori.png"
+        ],
+        on_finish: () => {
+          console.log('Preloaded part 1');
+        }
+    };
+
+    const preloadPart2 = {
+        type: jsPsychPreload,
+        trials: [part2]
+    };
+
+    jsPsych.run([preloadPart1, part1, preloadPart2, part2]);
+
+
+  </script>
+  </body>
+</html>
