@@ -37,9 +37,9 @@ def save_results(raw_data: dict, condition: int, subject_id: int):
 
 
 def increment_subject_id():
-    sid_idx = 4
+    get_sid_from_fname = lambda s: int(s[:-6].split('-')[1])
     try:
-        sid_max = max(int(f.name[sid_idx]) for f in DATA_DIR.glob('sub-*.csv'))
+        sid_max = max(get_sid_from_fname(f.name) for f in DATA_DIR.glob('sub-*.csv'))
     except (ValueError, AttributeError):
         # no data files yet
         sid_max = -1
