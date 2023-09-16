@@ -14,7 +14,7 @@ condition <- args[2]
 assets_dir <- '../static/assets'
 data_dir <- '../data'
 data_file <- sprintf('sub-%s_%s.csv', subject_id, condition)
-seed_file <- 'rcic_seed_1_time_May_07_2023_20_59.Rdata'
+seed_file <- 'rcic_seed_1_time_Sep_16_2023_15_28.Rdata'
 
 # rcicr args
 df_path <- file.path(data_dir, data_file)
