@@ -61,25 +61,28 @@
     </div>
     </section> -->
 
-    <main class="container">
+    <main class="container" style="padding: 0;">
         <article>
         <div class="grid">
             <div class="image-box">
-                <p class="image-description">Your Ben</p>
+                <h4>Your results</h4>
+                <p class="image-description">Ben, the nice guy</p>
                 <img src="{{ url_for('static', filename=subjectCI_0) }}" alt="Classification Image 1">
             </div>
             <div class="image-box">
+                <h4>Previous studies</h4>
                 <p class="image-description">Average Ben</p>
                 <img src="{{ url_for('static', filename='cis/average/avg_0.png') }}" alt="Average Image 1">
             </div>
             <div class="image-box">
+                <h4>Our model</h4>
                 <p class="image-description">AI Ben</p>
                 <img src="{{ url_for('static', filename='cis/average/sys_0.png') }}" alt="System Image 1">
             </div>
         </div>
         <div class="grid">
             <div class="image-box">
-                <p class="image-description">Your Tom</p>
+                <p class="image-description">Tom, the bully</p>
                 <img src="{{ url_for('static', filename=subjectCI_1) }}" alt="Classification Image 2">
             </div>
             <div class="image-box">
