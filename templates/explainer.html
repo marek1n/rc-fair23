@@ -39,6 +39,26 @@
             align-items: center;
             height: 200px;
         }
+
+        .baseimg {
+            max-width: 39%;
+            height: auto;
+        }
+        .content-container {
+            display: flex;
+            align-items: center; /* Align vertically centered */
+        }
+
+        .paragraph-container {
+            flex: 1; /* Take up available space */
+            margin-right: 5px; /* Add some spacing between paragraph and image */
+        }
+
+        .image-container {
+            text-align: center;
+        }
+
+
     </style>
 </head>
 <body>
@@ -54,9 +74,15 @@
         
         <progress id="p-bar"></progress>
 
-        <p>The <b>reverse correlation</b> method is a data-driven method increasingly used in social psychology 
-            to study how people perceive faces. Click on questions below to learn more.</p>
+        <p>The trials for Ben and Tom consisted of the <b>exact same</b> selection of faces. This is called <b>reverse correlation</b>, a data-driven method increasingly used in psychology 
+            to study social perception. Click on questions below to learn more.</p>
         </p>
+
+        <details>
+            <summary>What is this demonstration about?</summary>
+            <p>We are trying to visualize the influence of semantic context on the perception of facial expressions. 
+                This idea is called <b>knowledge-augemented face perception</b></p>
+        </details>
 
         <details>
             <summary>What influences human face perception?</summary>
@@ -64,18 +90,22 @@
                  what we know about the person as well as numerous context clues.
             </p>
         </details>
+
         <details>
             <summary>What is the method?</summary>
-            <p>A grayscale base image is overlayed with specific random noise filters, yielding a stimulus image and its exact inverse at each trial.
-            In effect, a large feature space is sampled by this method without the need for a priori hypotheses.
-            At the end of the experiment, the average of all selected images is computed (click on the button below to see your results).
-            </p>
+            <div class="content-container">
+                <div class="paragraph-container">
+                    <p>The original image (right) was overlayed with different filters, yielding a stimulus image and its exact inverse at each trial.
+                    Thus, a large feature space is sampled by this method without the need for a priori hypotheses.
+                    At the end of the experiment, the average the chosen images is computed.</p> 
+                    <!-- <p><i>collapse this cell and see your results by clicking <b>Show results </b></i></p> -->
+            </div>
+                <div class="image-container">
+                    <img class="baseimg" src="static/assets/imgs/base.png" alt="base image">
+                </div>    
+            </div>
         </details>
-        <details>
-            <summary>How is it used?</summary>
-            <p>We are trying to visualize the influence of semantic context on the perception of facial expressions. 
-                This idea is called <b>knowledge-augemented face processing</b></p>
-        </details>
+
 
         <div class="center">
             <button id="next-button" onclick="window.location.href='/results'", disabled="disabled">loading ....</button>
@@ -84,6 +114,7 @@
     </main>
 
     <script>
+        // enables 'Show results' button after 15000 ms
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout( () => {
                 document.getElementById("next-button").innerHTML = "Show results";
@@ -91,6 +122,21 @@
                 // document.getElementById("next-button").ariaBusy = false;
                 document.getElementById("p-bar").value = "100";
             }, 15000);
+        });
+
+        // this ensures only one dropdown is open at a given time
+        const detailsElements = document.querySelectorAll('details');
+
+        detailsElements.forEach((details) => {
+        const summary = details.querySelector('summary');
+
+        summary.addEventListener('click', () => {
+            detailsElements.forEach((otherDetails) => {
+            if (otherDetails !== details) {
+                otherDetails.removeAttribute('open');
+            }
+            });
+        });
         });
     </script>
 </body>

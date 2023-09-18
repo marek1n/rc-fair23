@@ -1,0 +1,11 @@
+,success,timeout,failed_images,failed_audio,failed_video,trial_type,trial_index,time_elapsed,internal_node_id,view_history,rt,response,condition
+1,,,,,,image-button-response,2,3120,0.0-1.0-1.0-0.0,,556.0,-1.0,0.0
+2,,,,,,image-button-response,3,3606,0.0-1.0-1.0-1.0,,478.0,1.0,0.0
+3,,,,,,image-button-response,4,4023,0.0-1.0-1.0-2.0,,410.0,-1.0,0.0
+4,,,,,,image-button-response,5,4375,0.0-1.0-1.0-3.0,,345.0,1.0,0.0
+5,,,,,,image-button-response,6,4791,0.0-1.0-1.0-4.0,,410.0,-1.0,0.0
+6,,,,,,image-button-response,7,5239,0.0-1.0-1.0-5.0,,442.0,1.0,0.0
+7,,,,,,image-button-response,8,5679,0.0-1.0-1.0-6.0,,434.0,-1.0,0.0
+8,,,,,,image-button-response,9,6111,0.0-1.0-1.0-7.0,,426.0,1.0,0.0
+9,,,,,,image-button-response,10,6519,0.0-1.0-1.0-8.0,,401.0,-1.0,0.0
+10,,,,,,image-button-response,11,6936,0.0-1.0-1.0-9.0,,410.0,1.0,0.0
