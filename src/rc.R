@@ -3,7 +3,7 @@ library(rcicr)
 # https://medium.com/@rondotsch/reverse-correlation-image-classification-using-r-a0701648fb0
 # TODO generate hi-res stimuli (~/.../scioi_fair_demonstrator/rproject_rc_demonstrator/material)
 
-setwd("/home/mn/demo/rc-server-main/src") # TODO
+setwd("/app/src") # TODO
 
 # extract cmd line args
 args <- commandArgs(trailingOnly = TRUE)
