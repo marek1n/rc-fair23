@@ -17,4 +17,4 @@ RUN Rscript -e "remotes::install_github('rdotsch/rcicr', dependencies=TRUE, upgr
 
 COPY . /app
 
-CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5001"]
+CMD ["gunicorn", "-w 4", "app:app", "--bind 0.0.0.0:$PORT"]

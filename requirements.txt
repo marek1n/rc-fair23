@@ -2,6 +2,7 @@ blinker
 click
 Flask
 Flask-Cors==4.0.0
+gunicorn==21.2.0
 importlib-metadata
 itsdangerous
 Jinja2

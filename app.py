@@ -4,11 +4,14 @@ from flask_cors import CORS
 from pathlib import Path
 import src.functions as fn
 import threading
+import os
 
 
 app = Flask(__name__)
 CORS(app)
 
+# Heroku env var
+port = int(os.environ.get("PORT", 5000))
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -51,5 +54,5 @@ def explainer():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False, port=5001)
+    app.run(host='0.0.0.0', debug=False, port=port)
 
